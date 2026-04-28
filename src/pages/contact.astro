@@ -12,67 +12,79 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="Contact Us" title="Let's talk!" />
 
   <ContactUs
     id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="Send us a message"
+    subtitle="Fill out the form below and we'll get back to you within one business day. Prefer to talk? Give us a call — we love hearing from our customers."
     inputs={[
       {
         type: 'text',
         name: 'name',
-        label: 'Name',
+        label: 'Your Name',
       },
       {
         type: 'email',
         name: 'email',
-        label: 'Email',
+        label: 'Email Address',
+      },
+      {
+        type: 'text',
+        name: 'phone',
+        label: 'Phone Number (optional)',
       },
     ]}
     textarea={{
-      label: 'Message',
+      label: 'Tell us about your project',
+      placeholder: 'Describe what you need help with. The more detail, the better!',
     }}
     disclaimer={{
       label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+        'By submitting this form, you agree that we may contact you regarding your inquiry.',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description="We typically respond within one business day. For urgent matters, please call us directly."
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="We are here to help!"
+    title="Other ways to reach us"
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
+        title: 'Phone & Text',
+        description: `Call or text us at <strong>(555) 123-4567</strong>. Available Monday–Friday, 8am–6pm. We also check messages on weekends.`,
+        icon: 'tabler:phone',
       },
       {
         title: 'Email',
-        description: 'contact@support.com',
+        description:
+          'Email us at <strong>hello@yourbusiness.com</strong>. We aim to respond to all emails within one business day.',
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        title: 'Service Area',
+        description:
+          'We serve <strong>[Your City]</strong> and surrounding communities within [X] miles. Not sure if we cover your area? Just ask!',
         icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Hours of Operation',
+        description:
+          '<strong>Monday–Friday:</strong> 8am–6pm<br /><strong>Saturday:</strong> 9am–3pm<br /><strong>Sunday:</strong> By appointment',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'Emergency Service',
+        description:
+          'For urgent situations, call our emergency line at <strong>(555) 987-6543</strong>. We do our best to respond quickly.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Follow Us',
+        description:
+          'Stay up to date with tips, before/after photos, and special offers by following us on Facebook and Instagram.',
+        icon: 'tabler:brand-facebook',
       },
     ]}
   />
