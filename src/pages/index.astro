@@ -1,283 +1,339 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import BookingCalendar from '~/components/widgets/BookingCalendar.astro';
+import LiveChat from '~/components/widgets/LiveChat.astro';
+import VenmoPayment from '~/components/widgets/VenmoPayment.astro';
 
 const metadata = {
-  title: 'Your Business Name — Professional Services in Your City',
+  title: 'WW Lawncare & Services — Precision Meets Nature',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get a Free Quote',
-        href: '/contact',
-        icon: 'tabler:arrow-right',
-      },
-      { text: 'Our Services', href: '/services' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Professional business team at work',
-    }}
-  >
-    <Fragment slot="title">
-      Trusted <span class="text-accent dark:text-white">Professional Services</span> for Your Community
-    </Fragment>
+  <!-- ═══════════════════════════════════════════
+       HERO — full-width photo background
+  ══════════════════════════════════════════════ -->
+  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-[76px]">
+    <!-- Background image -->
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+      aria-hidden="true"
+    ></div>
+    <!-- Dark green overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-green-950/85 via-green-900/75 to-green-800/60" aria-hidden="true"></div>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">Your Business Name</span> has been serving [Your City] and the surrounding area since [Year].</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">Serving [Your City] since [Year].</span>
-      We deliver [your core service] with a commitment to quality, integrity, and customer satisfaction.
-    </Fragment>
-  </Hero>
+    <!-- Hero content -->
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center py-32 pt-40">
+      <!-- Badge -->
+      <span class="inline-block bg-green-500/20 border border-green-400/40 text-green-200 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+        🌿 Serving Your Community
+      </span>
 
-  <!-- Features Widget *************** -->
+      <!-- Business name -->
+      <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+        WW Lawncare
+        <span class="block text-green-300">&amp; Services</span>
+      </h1>
 
+      <!-- Slogan -->
+      <p class="text-xl md:text-2xl text-green-100 font-light italic mb-4">
+        "Precision Meets Nature"
+      </p>
+
+      <!-- Sub-text -->
+      <p class="text-base md:text-lg text-green-200/80 max-w-xl mx-auto mb-10">
+        Professional lawn mowing, mulching, and exterior window washing — done right, every time.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#booking"
+          class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-4 rounded-xl text-base transition shadow-lg shadow-green-900/30"
+        >
+          📅 Book an Appointment
+        </a>
+        <a
+          href="#services"
+          class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-8 py-4 rounded-xl text-base transition backdrop-blur-sm"
+        >
+          See Services &amp; Pricing
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce text-2xl">↓</div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES & PRICING
+  ══════════════════════════════════════════════ -->
+  <section id="services" class="scroll-mt-[72px] py-20 bg-white dark:bg-slate-950">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-14">
+        <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">What We Do</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Services &amp; Pricing</h2>
+        <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+          Simple, transparent pricing with no hidden fees. Not sure what you need? <a href="#chat" class="text-green-600 dark:text-green-400 underline underline-offset-2">Ask us</a> for a free recommendation.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Card: Lawn Mowing -->
+        <div class="relative flex flex-col bg-white dark:bg-slate-900 rounded-2xl border-2 border-green-500 shadow-xl shadow-green-100 dark:shadow-green-900/20 p-8 overflow-hidden">
+          <!-- Popular ribbon -->
+          <div class="absolute top-0 right-0">
+            <div class="bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-bl-xl">Most Popular</div>
+          </div>
+
+          <div class="text-4xl mb-4">🌿</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Lawn Mowing</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Clean, precise cuts every visit</p>
+
+          <!-- Price -->
+          <div class="mb-6">
+            <span class="text-5xl font-extrabold text-green-600 dark:text-green-400">$40</span>
+            <span class="text-gray-400 dark:text-gray-500 text-base ml-1">/ lawn</span>
+          </div>
+
+          <ul class="space-y-2.5 mb-8 flex-1">
+            {[
+              'Standard residential lawn',
+              'Clean edging along walkways',
+              'Grass clippings cleared',
+              'Consistent weekly or bi-weekly visits',
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <span class="text-green-500 font-bold mt-0.5 flex-shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a href="#booking" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition text-sm">
+            Book Now — $40 →
+          </a>
+        </div>
+
+        <!-- Card: Mulching -->
+        <div class="flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-lg p-8">
+          <div class="text-4xl mb-4">🍂</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Mulching</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Fresh mulch, beautifully applied</p>
+
+          <!-- Price -->
+          <div class="mb-6">
+            <span class="text-2xl font-bold text-gray-700 dark:text-gray-200">Free Quote</span>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Pricing based on area & material</p>
+          </div>
+
+          <ul class="space-y-2.5 mb-8 flex-1">
+            {[
+              'All mulch types available',
+              'Bed preparation included',
+              'Weed barrier installation',
+              'Clean, professional finish',
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <span class="text-green-500 font-bold mt-0.5 flex-shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a href="#chat" class="w-full flex items-center justify-center gap-2 border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-500 hover:bg-green-600 hover:text-white font-bold py-3.5 rounded-xl transition text-sm">
+            Request a Quote →
+          </a>
+        </div>
+
+        <!-- Card: Window Washing -->
+        <div class="flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-lg p-8">
+          <div class="text-4xl mb-4">🪟</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Exterior Window Washing</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Crystal-clear windows, streak-free</p>
+
+          <!-- Price -->
+          <div class="mb-6">
+            <span class="text-2xl font-bold text-gray-700 dark:text-gray-200">Free Quote</span>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Pricing based on number of windows</p>
+          </div>
+
+          <ul class="space-y-2.5 mb-8 flex-1">
+            {[
+              'All exterior windows & frames',
+              'Screen cleaning available',
+              'Streak-free guarantee',
+              'Residential & light commercial',
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <span class="text-green-500 font-bold mt-0.5 flex-shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a href="#chat" class="w-full flex items-center justify-center gap-2 border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-500 hover:bg-green-600 hover:text-white font-bold py-3.5 rounded-xl transition text-sm">
+            Request a Quote →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHY CHOOSE WW
+  ══════════════════════════════════════════════ -->
   <Features
-    id="features"
-    tagline="Why Choose Us"
-    title="What sets us apart"
-    subtitle="We combine years of local expertise with a genuine commitment to every customer we serve."
+    tagline="Why WW Lawncare"
+    title="The difference you'll notice"
+    subtitle="We show up on time, do the job right, and leave your property looking better than we found it — every single visit."
     items={[
       {
         title: 'Licensed & Insured',
-        description:
-          'Fully licensed and insured for your peace of mind. We meet all local and state requirements so you never have to worry.',
+        description: 'Fully insured for your protection. Work with confidence knowing you\'re covered if anything goes wrong.',
         icon: 'tabler:shield-check',
       },
       {
-        title: 'Local Expertise',
-        description:
-          'We know [Your City] inside and out. Our deep community roots mean faster response times and solutions tailored to local needs.',
-        icon: 'tabler:map-pin',
-      },
-      {
-        title: 'Upfront Pricing',
-        description:
-          'No hidden fees, no surprises. You get a clear, detailed quote before any work begins so you always know what to expect.',
-        icon: 'tabler:receipt',
-      },
-      {
-        title: 'Quality Guaranteed',
-        description:
-          'We stand behind every job with a satisfaction guarantee. If something is not right, we make it right — no questions asked.',
-        icon: 'tabler:star',
-      },
-      {
-        title: 'Fast Response',
-        description:
-          'We respect your time. Same-day and next-day appointments are often available, and we always show up when we say we will.',
+        title: 'Reliable Scheduling',
+        description: 'We show up when we say we will — no no-shows, no excuses. Your time matters and we respect it.',
         icon: 'tabler:clock',
       },
       {
-        title: 'Years of Experience',
-        description:
-          'With [X]+ years serving [Your City], our team brings the expertise and know-how to handle any job, big or small.',
-        icon: 'tabler:award',
+        title: 'Upfront Pricing',
+        description: 'No surprise charges. Lawn mowing is always $40, and quotes are free with no obligation to book.',
+        icon: 'tabler:receipt',
+      },
+      {
+        title: 'Local & Community-Focused',
+        description: 'We\'re your neighbors. We care about the quality of work we leave behind in our own community.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Quality Guarantee',
+        description: 'Not happy with something? We\'ll come back and make it right at no extra charge.',
+        icon: 'tabler:star',
+      },
+      {
+        title: 'Easy Booking & Payment',
+        description: 'Book online in minutes and pay instantly via Venmo — simple from start to finish.',
+        icon: 'tabler:thumb-up',
       },
     ]}
-  />
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    tagline="About Us"
-    title="A local business you can count on"
-    items={[
-      {
-        title: 'Community-focused',
-        description:
-          'We live and work here too. Supporting local businesses and neighbors is at the heart of everything we do.',
-      },
-      {
-        title: 'Experienced team',
-        description:
-          'Our skilled professionals bring [X]+ years of combined experience and stay current on best practices in the industry.',
-      },
-      {
-        title: 'Customer-first approach',
-        description:
-          'Every project is treated with the same care and attention we would give our own home or business.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2084&q=80',
-      alt: 'Team working together',
-    }}
   >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Built on trust, driven by results</h3>
-      We've helped hundreds of [Your City] residents and businesses with their [service] needs — and we'd love to help you too.
-    </Fragment>
-
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
     </Fragment>
-  </Content>
+  </Features>
 
-  <!-- Steps Widget ****************** -->
 
-  <Steps
-    title="Getting started is easy"
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Contact Us</span>',
-        description:
-          'Call, email, or fill out our online form. Tell us about your project and we\'ll get back to you within one business day.',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Free Consultation</span>',
-        description:
-          'We\'ll come to you (or meet virtually) to assess your needs and provide a detailed, no-obligation quote.',
-        icon: 'tabler:clipboard-list',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">We Get to Work</span>',
-        description:
-          'Once you approve the quote, our team schedules and completes the job on time and on budget.',
-        icon: 'tabler:tools',
-      },
-      {
-        title: 'Enjoy the Results!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
-      alt: 'Happy customer',
-    }}
-  />
-
-  <!-- Testimonials Widget *********** -->
-
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ══════════════════════════════════════════════ -->
   <Testimonials
     title="What our customers say"
-    subtitle="Don't just take our word for it — hear from the neighbors and businesses we've had the pleasure of serving."
+    subtitle="Real reviews from real neighbors."
     testimonials={[
       {
-        testimonial: `[Your Business Name] did an amazing job. They were professional, on time, and the quality of work exceeded our expectations. I won't use anyone else!`,
-        name: 'Jane D.',
-        job: '[Your City] Homeowner',
+        testimonial: `WW Lawncare completely transformed my yard. They were on time, professional, and the lawn looked immaculate. I booked weekly service on the spot — best $40 I spend all week!`,
+        name: 'Jessica R.',
+        job: 'Homeowner',
         image: {
           src: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
-          alt: 'Jane D.',
+          alt: 'Jessica R.',
         },
       },
       {
-        testimonial: `Fair pricing, excellent work, and they cleaned up everything when they were done. Highly recommend to anyone in the area looking for [service].`,
-        name: 'Mike T.',
-        job: 'Local Business Owner',
+        testimonial: `Got a quote for mulching within an hour of reaching out. Fair price, they did the beds in half a day, and cleaned up everything. My garden has never looked better.`,
+        name: 'Marcus T.',
+        job: 'Local homeowner',
         image: {
           src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-          alt: 'Mike T.',
+          alt: 'Marcus T.',
         },
       },
       {
-        testimonial: `I've used them twice now and both times were great. They took the time to explain everything clearly and never tried to upsell me on things I didn't need.`,
-        name: 'Sarah M.',
-        job: '[Your City] Resident',
+        testimonial: `Had them wash the exterior windows on my place. Streak-free, quick, and super professional. Way better results than doing it myself. Already booked them for spring.`,
+        name: 'Sandra P.',
+        job: 'Small business owner',
         image: {
           src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-          alt: 'Sarah M.',
+          alt: 'Sandra P.',
         },
       },
     ]}
   />
 
-  <!-- Stats Widget ****************** -->
 
-  <Stats
-    stats={[
-      { title: 'Years in Business', amount: '[X]+' },
-      { title: 'Happy Customers', amount: '[X]K+' },
-      { title: 'Projects Completed', amount: '[X]K+' },
-      { title: '5-Star Reviews', amount: '[X]+' },
-    ]}
+  <!-- ═══════════════════════════════════════════
+       BOOKING CALENDAR
+  ══════════════════════════════════════════════ -->
+  <BookingCalendar
+    title="Book an Appointment"
+    subtitle="Pick a date and time that works for you. We confirm within 24 hours."
+    tagline="Schedule"
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BookingCalendar>
+
+
+  <!-- ═══════════════════════════════════════════
+       LIVE CHAT
+  ══════════════════════════════════════════════ -->
+  <LiveChat
+    businessName="WW Lawncare"
+    businessPhone="(555) 000-0000"
+    businessEmail="hello@wwlawncare.com"
   />
 
-  <!-- FAQs Widget ******************* -->
 
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Have questions? We have answers. If you don't see what you're looking for, just give us a call."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'What areas do you serve?',
-        description:
-          'We primarily serve [Your City] and the surrounding communities within [X] miles, including [Nearby Town 1], [Nearby Town 2], and [Nearby Town 3]. Not sure if we cover your area? Give us a call and we\'ll let you know.',
-      },
-      {
-        title: 'Do you offer free estimates?',
-        description:
-          'Yes! We provide free, no-obligation estimates for all projects. Contact us to schedule a time that works for you.',
-      },
-      {
-        title: 'Are you licensed and insured?',
-        description:
-          'Absolutely. We are fully licensed in [Your State] and carry comprehensive liability insurance and workers\' compensation coverage. We\'re happy to provide proof of insurance upon request.',
-      },
-      {
-        title: 'How quickly can you start my project?',
-        description:
-          'For most projects, we can schedule a start date within [X] business days of approving your quote. For urgent situations, we do our best to accommodate same-day or next-day service.',
-      },
-      {
-        title: 'What payment methods do you accept?',
-        description:
-          'We accept cash, check, and all major credit cards. We also offer financing options for larger projects — ask us for details.',
-      },
-      {
-        title: 'Do you stand behind your work?',
-        description:
-          'We offer a [X]-year workmanship warranty on all our services. If you\'re not satisfied, we\'ll make it right. Your happiness is our top priority.',
-      },
-    ]}
+  <!-- ═══════════════════════════════════════════
+       VENMO PAYMENT
+  ══════════════════════════════════════════════ -->
+  <VenmoPayment
+    venmoHandle="@WWLawncare"
+    title="Pay Your Invoice"
+    subtitle="Quick, secure payment via Venmo. Questions about your bill? Just chat with us."
   />
 
-  <!-- CallToAction Widget *********** -->
 
+  <!-- ═══════════════════════════════════════════
+       FINAL CTA
+  ══════════════════════════════════════════════ -->
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get a Free Quote',
-        href: '/contact',
-        icon: 'tabler:arrow-right',
+        text: 'Book an Appointment',
+        href: '#booking',
+        icon: 'tabler:calendar',
       },
       {
         variant: 'secondary',
-        text: 'Call Us Now',
-        href: 'tel:+15551234567',
-        icon: 'tabler:phone',
+        text: 'Request a Quote',
+        href: '#chat',
+        icon: 'tabler:message',
       },
     ]}
   >
     <Fragment slot="title">
-      Ready to get started?
+      Ready for a yard you're proud of?
     </Fragment>
-
     <Fragment slot="subtitle">
-      Contact us today for a free, no-obligation consultation. We're here to help — and we always pick up the phone.
+      Book online in minutes — or send us a message and we'll reach out same day.
     </Fragment>
   </CallToAction>
+
 </Layout>

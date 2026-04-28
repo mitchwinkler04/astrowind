@@ -1,0 +1,272 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  isDark?: boolean;
+}
+
+const {
+  id = 'booking',
+  title = 'Book an Appointment',
+  subtitle = "Pick a date and time. We'll confirm your appointment by phone within 24 hours.",
+  tagline = 'Schedule',
+  isDark = false,
+} = Astro.props;
+
+// =============================================================
+// AVAILABILITY CONFIG — Edit this to control your open slots
+// =============================================================
+const bookingConfig = {
+  // Days of week you work: 0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
+  availableDays: [1, 2, 3, 4, 5],
+
+  // Time slots offered on each available day
+  timeSlots: ['8:00 AM', '10:00 AM', '12:00 PM', '2:00 PM', '4:00 PM'],
+
+  // Block specific dates — add 'YYYY-MM-DD' strings (holidays, vacations, etc.)
+  blockedDates: [] as string[],
+
+  // Your booking email (receives booking requests)
+  businessEmail: 'booking@wwlawncare.com',
+};
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass="max-w-6xl mx-auto">
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="grid lg:grid-cols-5 gap-6 mt-8">
+    <!-- ── Calendar Panel ── -->
+    <div class="lg:col-span-3 bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-slate-800">
+      <!-- Month nav -->
+      <div class="flex items-center justify-between mb-5">
+        <button
+          id="cal-prev"
+          aria-label="Previous month"
+          class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition text-gray-500 dark:text-gray-300 text-xl font-light"
+        >&#8249;</button>
+        <h3 id="cal-month-year" class="text-lg font-bold text-gray-800 dark:text-white"></h3>
+        <button
+          id="cal-next"
+          aria-label="Next month"
+          class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition text-gray-500 dark:text-gray-300 text-xl font-light"
+        >&#8250;</button>
+      </div>
+
+      <!-- Day-of-week headers -->
+      <div class="grid grid-cols-7 mb-1">
+        {['Su','Mo','Tu','We','Th','Fr','Sa'].map((d) => (
+          <div class="text-center text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase py-1">{d}</div>
+        ))}
+      </div>
+
+      <!-- Date grid (filled by JS) -->
+      <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
+
+      <!-- Legend -->
+      <div class="flex items-center gap-5 mt-5 text-xs text-gray-400 dark:text-gray-500">
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>Available</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-gray-200 dark:bg-gray-700 inline-block"></span>Unavailable</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full border-2 border-green-400 inline-block"></span>Today</span>
+      </div>
+    </div>
+
+    <!-- ── Right Panel ── -->
+    <div class="lg:col-span-2 flex flex-col gap-4">
+
+      <!-- Empty state -->
+      <div id="cal-empty" class="flex flex-col items-center justify-center min-h-52 text-center p-8 bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800">
+        <div class="text-5xl mb-3">📅</div>
+        <p class="text-gray-400 dark:text-gray-500 text-sm">Select an available date<br />to see open time slots.</p>
+      </div>
+
+      <!-- Time slots -->
+      <div id="cal-slots-panel" class="hidden bg-white dark:bg-slate-900 rounded-2xl shadow-md p-5 border border-gray-100 dark:border-slate-800">
+        <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-1">Select a time</p>
+        <p id="cal-selected-date" class="font-bold text-gray-800 dark:text-white mb-4 text-sm"></p>
+        <div id="cal-slots-grid" class="grid grid-cols-2 gap-2"></div>
+      </div>
+
+      <!-- Booking form -->
+      <div id="cal-form-panel" class="hidden bg-white dark:bg-slate-900 rounded-2xl shadow-md p-5 border border-gray-100 dark:border-slate-800">
+        <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-4">Your details</p>
+        <form id="cal-form" name="booking" method="POST" data-netlify="true" class="space-y-3">
+          <input type="hidden" name="form-name" value="booking" />
+          <input type="hidden" id="cal-f-date" name="date" />
+          <input type="hidden" id="cal-f-time" name="time" />
+
+          <select name="service" class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500">
+            <option>Lawn Mowing — $40</option>
+            <option>Mulching — Get a Quote</option>
+            <option>Exterior Window Washing — Get a Quote</option>
+          </select>
+
+          <input required type="text" name="name" placeholder="Full name *" class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <input required type="tel" name="phone" placeholder="Phone number *" class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <input required type="text" name="address" placeholder="Service address *" class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <input type="email" name="email" placeholder="Email (optional)" class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <textarea name="notes" rows="2" placeholder="Gate code, special instructions..." class="w-full border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"></textarea>
+
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition text-sm">
+            Request Appointment →
+          </button>
+          <p class="text-xs text-gray-400 text-center">We confirm within 24 hours.</p>
+        </form>
+      </div>
+
+      <!-- Success -->
+      <div id="cal-success" class="hidden bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-200 dark:border-green-800 p-8 text-center">
+        <div class="text-5xl mb-3">✅</div>
+        <h4 class="font-bold text-green-800 dark:text-green-300 text-lg mb-2">Request Sent!</h4>
+        <p class="text-green-700 dark:text-green-400 text-sm">We'll call or text to confirm within 24 hours. Thank you!</p>
+      </div>
+
+    </div>
+  </div>
+</WidgetWrapper>
+
+<script define:vars={{ bookingConfig }}>
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  let viewYear = new Date().getFullYear();
+  let viewMonth = new Date().getMonth();
+  let pickedDate = null;
+  let pickedTime = null;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function toStr(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
+
+  function isAvailable(y, m, d) {
+    const date = new Date(y, m, d);
+    const today = new Date(); today.setHours(0,0,0,0);
+    if (date < today) return false;
+    if (!bookingConfig.availableDays.includes(date.getDay())) return false;
+    if (bookingConfig.blockedDates.includes(toStr(y, m, d))) return false;
+    return true;
+  }
+
+  function renderCalendar() {
+    const grid = document.getElementById('cal-grid');
+    const label = document.getElementById('cal-month-year');
+    if (!grid || !label) return;
+
+    label.textContent = `${MONTHS[viewMonth]} ${viewYear}`;
+    grid.innerHTML = '';
+
+    const firstDow = new Date(viewYear, viewMonth, 1).getDay();
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+    const todayStr = toStr(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+    for (let i = 0; i < firstDow; i++) {
+      grid.appendChild(document.createElement('div'));
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = toStr(viewYear, viewMonth, day);
+      const avail = isAvailable(viewYear, viewMonth, day);
+      const selected = pickedDate === dateStr;
+      const isToday = dateStr === todayStr;
+
+      const btn = document.createElement('button');
+      btn.textContent = String(day);
+      btn.setAttribute('type', 'button');
+
+      if (selected) {
+        btn.className = 'aspect-square rounded-full text-sm font-bold bg-green-600 text-white flex items-center justify-center w-full';
+      } else if (avail) {
+        const todayRing = isToday ? ' ring-2 ring-green-400 ring-offset-1' : '';
+        btn.className = `aspect-square rounded-full text-sm font-semibold text-green-800 dark:text-green-300 bg-green-100 dark:bg-green-900/40 hover:bg-green-500 hover:text-white flex items-center justify-center w-full transition cursor-pointer${todayRing}`;
+        btn.addEventListener('click', () => pickDate(dateStr, day));
+      } else {
+        btn.className = 'aspect-square rounded-full text-sm text-gray-300 dark:text-gray-700 flex items-center justify-center w-full cursor-not-allowed';
+        btn.disabled = true;
+      }
+
+      grid.appendChild(btn);
+    }
+  }
+
+  function pickDate(dateStr, day) {
+    pickedDate = dateStr;
+    pickedTime = null;
+    renderCalendar();
+
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    const dateFmt = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+    const dateLabel = document.getElementById('cal-selected-date');
+    if (dateLabel) dateLabel.textContent = dateFmt;
+
+    const slotsGrid = document.getElementById('cal-slots-grid');
+    if (slotsGrid) {
+      slotsGrid.innerHTML = '';
+      bookingConfig.timeSlots.forEach((slot) => {
+        const btn = document.createElement('button');
+        btn.textContent = slot;
+        btn.setAttribute('type', 'button');
+        btn.className = 'border-2 border-green-500 text-green-700 dark:text-green-400 rounded-lg py-2 px-2 text-sm font-semibold hover:bg-green-500 hover:text-white transition';
+        btn.addEventListener('click', () => pickTime(slot, btn));
+        slotsGrid.appendChild(btn);
+      });
+    }
+
+    document.getElementById('cal-empty')?.classList.add('hidden');
+    document.getElementById('cal-form-panel')?.classList.add('hidden');
+    document.getElementById('cal-slots-panel')?.classList.remove('hidden');
+  }
+
+  function pickTime(slot, clickedBtn) {
+    pickedTime = slot;
+
+    document.querySelectorAll('#cal-slots-grid button').forEach((b) => {
+      b.className = 'border-2 border-green-500 text-green-700 dark:text-green-400 rounded-lg py-2 px-2 text-sm font-semibold hover:bg-green-500 hover:text-white transition';
+    });
+    clickedBtn.className = 'border-2 border-green-600 bg-green-600 text-white rounded-lg py-2 px-2 text-sm font-semibold transition';
+
+    const fDate = document.getElementById('cal-f-date');
+    const fTime = document.getElementById('cal-f-time');
+    if (fDate) fDate.value = pickedDate ?? '';
+    if (fTime) fTime.value = pickedTime ?? '';
+
+    document.getElementById('cal-form-panel')?.classList.remove('hidden');
+  }
+
+  document.getElementById('cal-form')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const subject = encodeURIComponent(`Booking Request — ${data.get('service')}`);
+    const body = encodeURIComponent(
+      `New Appointment Request\n` +
+      `─────────────────────\n` +
+      `Date:    ${data.get('date')}\n` +
+      `Time:    ${data.get('time')}\n` +
+      `Service: ${data.get('service')}\n\n` +
+      `Name:    ${data.get('name')}\n` +
+      `Phone:   ${data.get('phone')}\n` +
+      `Address: ${data.get('address')}\n` +
+      `Email:   ${data.get('email')}\n\n` +
+      `Notes: ${data.get('notes')}`
+    );
+    window.open(`mailto:${bookingConfig.businessEmail}?subject=${subject}&body=${body}`, '_blank');
+
+    document.getElementById('cal-form-panel')?.classList.add('hidden');
+    document.getElementById('cal-slots-panel')?.classList.add('hidden');
+    document.getElementById('cal-success')?.classList.remove('hidden');
+  });
+
+  document.getElementById('cal-prev')?.addEventListener('click', () => {
+    viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    renderCalendar();
+  });
+  document.getElementById('cal-next')?.addEventListener('click', () => {
+    viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    renderCalendar();
+  });
+
+  renderCalendar();
+</script>

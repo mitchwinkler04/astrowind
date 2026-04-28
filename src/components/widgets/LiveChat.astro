@@ -1,0 +1,138 @@
+---
+interface Props {
+  id?: string;
+  businessName?: string;
+  businessPhone?: string;
+  businessEmail?: string;
+}
+
+const {
+  id = 'chat',
+  businessName = 'WW Lawncare',
+  businessPhone = '(555) 000-0000',
+  businessEmail = 'hello@wwlawncare.com',
+} = Astro.props;
+---
+
+<section id={id} class="scroll-mt-[72px] py-16 bg-gray-50 dark:bg-slate-950">
+  <div class="max-w-2xl mx-auto px-4">
+
+    <div class="text-center mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">Chat With Us</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">Questions? We're here.</h2>
+      <p class="text-gray-500 dark:text-gray-400">Send a message and we'll get back to you fast — or call/text us directly.</p>
+    </div>
+
+    <!-- Chat card -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-800 overflow-hidden">
+
+      <!-- Chat header bar -->
+      <div class="bg-green-600 px-5 py-4 flex items-center gap-3">
+        <div class="relative flex-shrink-0">
+          <div class="w-10 h-10 rounded-full bg-green-800 flex items-center justify-center text-white font-bold text-sm select-none">WW</div>
+          <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-300 rounded-full border-2 border-green-600"></div>
+        </div>
+        <div>
+          <p class="text-white font-bold text-sm">{businessName} &amp; Services</p>
+          <p class="text-green-200 text-xs">Typically replies within a few hours</p>
+        </div>
+      </div>
+
+      <!-- Message thread -->
+      <div class="p-5 bg-gray-50 dark:bg-slate-900/50 space-y-3 min-h-40">
+        <div class="flex items-end gap-2">
+          <div class="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">WW</div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl rounded-bl-none px-4 py-2.5 shadow-sm max-w-xs">
+            <p class="text-sm text-gray-800 dark:text-white">👋 Hi! Thanks for reaching out to <strong>{businessName}</strong>.</p>
+          </div>
+        </div>
+        <div class="flex items-end gap-2">
+          <div class="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">WW</div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl rounded-bl-none px-4 py-2.5 shadow-sm max-w-xs">
+            <p class="text-sm text-gray-800 dark:text-white">Drop us a message below or call <strong>{businessPhone}</strong> for a faster response.</p>
+          </div>
+        </div>
+        <!-- Sent message bubbles go here -->
+        <div id="chat-sent-messages" class="flex flex-col items-end gap-2"></div>
+      </div>
+
+      <!-- Input area -->
+      <div id="chat-input-area" class="border-t border-gray-100 dark:border-slate-800 p-4">
+        <form id="chat-form" name="contact" method="POST" data-netlify="true" class="space-y-3">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="grid grid-cols-2 gap-2">
+            <input required type="text" name="name" placeholder="Your name *"
+              class="border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full" />
+            <input required type="tel" name="phone" placeholder="Phone number *"
+              class="border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full" />
+          </div>
+
+          <div class="flex gap-2 items-end">
+            <textarea id="chat-message" required name="message" rows="2" placeholder="Type your message..."
+              class="flex-1 border border-gray-200 dark:border-slate-700 rounded-xl px-3 py-2 text-sm resize-none bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+            <button type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white rounded-xl px-4 py-2 font-bold text-sm transition flex-shrink-0 h-10">
+              Send ↗
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success state -->
+      <div id="chat-success" class="hidden border-t border-gray-100 dark:border-slate-800 px-5 py-4 text-center">
+        <p class="text-green-600 dark:text-green-400 font-semibold text-sm">✅ Message sent — we'll be in touch soon!</p>
+      </div>
+    </div>
+
+    <!-- Alternative contact tiles -->
+    <div class="mt-5 grid grid-cols-3 gap-3">
+      {([
+        { icon: '📞', label: 'Call Us', detail: businessPhone, href: `tel:${businessPhone.replace(/\D/g, '')}` },
+        { icon: '💬', label: 'Text Us', detail: businessPhone, href: `sms:${businessPhone.replace(/\D/g, '')}` },
+        { icon: '✉️', label: 'Email Us', detail: businessEmail, href: `mailto:${businessEmail}` },
+      ] as { icon: string; label: string; detail: string; href: string }[]).map(({ icon, label, detail, href }) => (
+        <a
+          href={href}
+          class="flex flex-col items-center gap-1 bg-white dark:bg-slate-900 rounded-xl p-4 border border-gray-100 dark:border-slate-800 hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition group text-center"
+        >
+          <span class="text-2xl">{icon}</span>
+          <span class="text-xs font-bold text-gray-700 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-400">{label}</span>
+          <span class="text-xs text-gray-400 truncate w-full text-center">{detail}</span>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('chat-form') as HTMLFormElement | null;
+  const sentMessages = document.getElementById('chat-sent-messages');
+  const inputArea = document.getElementById('chat-input-area');
+  const successDiv = document.getElementById('chat-success');
+
+  form?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const msg = (data.get('message') as string)?.trim();
+
+    if (msg && sentMessages) {
+      const bubble = document.createElement('div');
+      bubble.className = 'bg-green-600 text-white rounded-2xl rounded-br-none px-4 py-2.5 max-w-xs text-sm shadow-sm';
+      bubble.textContent = msg;
+      sentMessages.appendChild(bubble);
+    }
+
+    const subject = encodeURIComponent('WW Lawncare — Customer Message');
+    const body = encodeURIComponent(
+      `Name: ${data.get('name')}\nPhone: ${data.get('phone')}\n\nMessage:\n${data.get('message')}`
+    );
+    window.open(`mailto:${form?.dataset.email ?? 'hello@wwlawncare.com'}?subject=${subject}&body=${body}`, '_blank');
+
+    setTimeout(() => {
+      inputArea?.classList.add('hidden');
+      successDiv?.classList.remove('hidden');
+    }, 400);
+  });
+</script>

@@ -1,0 +1,80 @@
+---
+interface Props {
+  id?: string;
+  venmoHandle?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  id = 'pay',
+  venmoHandle = '@WWLawncare',
+  title = 'Pay Your Invoice',
+  subtitle = 'Quick and secure payment via Venmo. No Venmo? You can also pay by card — just ask.',
+} = Astro.props;
+
+const handle = venmoHandle.startsWith('@') ? venmoHandle : `@${venmoHandle}`;
+const venmoUrl = `https://venmo.com/${handle.replace('@', '')}`;
+---
+
+<section id={id} class="scroll-mt-[72px] py-16 bg-white dark:bg-slate-900">
+  <div class="max-w-lg mx-auto px-4 text-center">
+
+    <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">Payment</p>
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">{title}</h2>
+    <p class="text-gray-500 dark:text-gray-400 mb-10">{subtitle}</p>
+
+    <div class="bg-gray-50 dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-lg overflow-hidden">
+
+      <!-- Venmo header -->
+      <div class="bg-[#008CFF] px-8 py-6 flex items-center justify-center gap-4">
+        <div class="bg-white/20 rounded-xl p-2.5">
+          <svg class="w-9 h-9 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.01 2c.74 1.23 1.07 2.49 1.07 4.1 0 5.12-4.37 11.78-7.93 16.45H4.93L2 3.92l6.93-.67 1.52 12.22C12.31 12.32 14.87 7.2 14.87 3.89c0-1.97-.33-3.3-.87-4.4l5.01 2.51z"/>
+          </svg>
+        </div>
+        <span class="text-white text-3xl font-extrabold tracking-tight">Venmo</span>
+      </div>
+
+      <!-- Handle display -->
+      <div class="px-8 py-6">
+        <p class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">Send payment to</p>
+        <p class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">{handle}</p>
+
+        <!-- Steps -->
+        <ol class="text-left space-y-3 mb-8">
+          {([
+            `Open the Venmo app on your phone`,
+            `Tap the search icon and find <strong class="text-gray-900 dark:text-white">${handle}</strong>`,
+            'Enter the amount from your invoice',
+            'Add your name &amp; service date in the note field',
+            'Tap <strong class="text-gray-900 dark:text-white">Pay</strong> — done!',
+          ] as string[]).map((step, i) => (
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+              <span class="text-sm text-gray-600 dark:text-gray-300" set:html={step} />
+            </li>
+          ))}
+        </ol>
+
+        <!-- CTA button -->
+        <a
+          href={venmoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full bg-[#008CFF] hover:bg-[#006ECC] text-white font-bold py-4 px-6 rounded-xl transition text-sm mb-3"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.01 2c.74 1.23 1.07 2.49 1.07 4.1 0 5.12-4.37 11.78-7.93 16.45H4.93L2 3.92l6.93-.67 1.52 12.22C12.31 12.32 14.87 7.2 14.87 3.89c0-1.97-.33-3.3-.87-4.4l5.01 2.51z"/>
+          </svg>
+          Open Venmo to Pay
+        </a>
+
+        <p class="text-xs text-gray-400 dark:text-gray-500">
+          Invoice questions? <a href="#chat" class="text-green-600 dark:text-green-400 hover:underline">Send us a message</a> and we'll sort it out.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>

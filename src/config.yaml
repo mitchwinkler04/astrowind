@@ -1,30 +1,27 @@
 site:
-  name: Your Business Name
-  site: 'https://yourdomain.com'
+  name: WW Lawncare & Services
+  site: 'https://wwlawncare.com'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: # Add your Google verification ID here
-
-# Default SEO metadata
 metadata:
   title:
-    default: Your Business Name
-    template: '%s — Your Business Name'
-  description: "Professional services you can trust. Serving [Your City] and surrounding areas."
+    default: WW Lawncare & Services — Precision Meets Nature
+    template: '%s — WW Lawncare & Services'
+  description: "Precision Meets Nature. Professional lawn mowing, mulching, and exterior window washing. Serving your community with quality and care."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: Your Business Name
+    site_name: WW Lawncare & Services
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@yourbusiness'
-    site: '@yourbusiness'
+    handle: '@wwlawncare'
+    site: '@wwlawncare'
     cardType: summary_large_image
 
 i18n:
@@ -33,34 +30,29 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
-
     post:
-      isEnabled: true
+      isEnabled: false
       permalink: '/%slug%'
       robots:
-        index: true
-
+        index: false
     list:
-      isEnabled: true
+      isEnabled: false
       pathname: 'blog'
       robots:
-        index: true
-
+        index: false
     category:
-      isEnabled: true
+      isEnabled: false
       pathname: 'category'
       robots:
-        index: true
-
+        index: false
     tag:
-      isEnabled: true
+      isEnabled: false
       pathname: 'tag'
       robots:
         index: false
-
-    isRelatedPostsEnabled: true
+    isRelatedPostsEnabled: false
     relatedPostsCount: 4
 
 analytics:
@@ -69,4 +61,4 @@ analytics:
       id: null # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'system'

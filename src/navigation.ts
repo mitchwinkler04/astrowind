@@ -1,25 +1,13 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    {
-      text: 'Services',
-      href: getPermalink('/services'),
-    },
-    {
-      text: 'About',
-      href: getPermalink('/about'),
-    },
-    {
-      text: 'Blog',
-      href: getBlogPermalink(),
-    },
-    {
-      text: 'Contact',
-      href: getPermalink('/contact'),
-    },
+    { text: 'Services & Pricing', href: '/#services' },
+    { text: 'Book Appointment', href: '/#booking' },
+    { text: 'Chat With Us', href: '/#chat' },
+    { text: 'Pay', href: '/#pay' },
   ],
-  actions: [{ text: 'Get a Free Quote', href: getPermalink('/contact') }],
+  actions: [{ text: 'Book Now', href: '/#booking' }],
 };
 
 export const footerData = {
@@ -27,37 +15,37 @@ export const footerData = {
     {
       title: 'Services',
       links: [
-        { text: 'Our Services', href: getPermalink('/services') },
-        { text: 'Pricing', href: getPermalink('/pricing') },
+        { text: 'Lawn Mowing — $40', href: '/#services' },
+        { text: 'Mulching', href: '/#services' },
+        { text: 'Window Washing', href: '/#services' },
       ],
     },
     {
-      title: 'Company',
+      title: 'Quick Links',
       links: [
-        { text: 'About Us', href: getPermalink('/about') },
-        { text: 'Blog', href: getBlogPermalink() },
-        { text: 'Contact', href: getPermalink('/contact') },
+        { text: 'Book Appointment', href: '/#booking' },
+        { text: 'Chat With Us', href: '/#chat' },
+        { text: 'Pay Your Bill', href: '/#pay' },
       ],
     },
     {
       title: 'Legal',
       links: [
-        { text: 'Terms', href: getPermalink('/terms') },
         { text: 'Privacy Policy', href: getPermalink('/privacy') },
+        { text: 'Terms of Service', href: getPermalink('/terms') },
       ],
     },
   ],
   secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Terms', href: getPermalink('/terms') },
   ],
   socialLinks: [
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
     { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    <span class="text-sm">&copy; ${new Date().getFullYear()} Your Business Name. All rights reserved.</span>
+    <span class="text-sm">&copy; ${new Date().getFullYear()} WW Lawncare &amp; Services. All rights reserved.</span>
   `,
 };
