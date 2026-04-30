@@ -1,208 +1,403 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Features from '~/components/widgets/Features.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'Services & Pricing',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
 
-  <Hero
-    tagline="Our Services"
-    title="Everything you need, all in one place"
-    subtitle="From routine maintenance to complex projects, we have the skills and experience to get the job done right the first time."
-    actions={[{ variant: 'primary', text: 'Get a Free Quote', href: '/contact' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Professional at work',
-    }}
-  />
+  <!-- ══ PAGE HERO ══ -->
+  <section class="relative overflow-hidden -mt-[76px]">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-950/80 via-green-900/70 to-green-950/80" aria-hidden="true"></div>
 
-  <!-- Features2 Widget ************** -->
+    <div class="relative max-w-4xl mx-auto px-4 text-center py-36 pt-44">
+      <p class="text-xs font-semibold uppercase tracking-widest text-green-300 mb-3">WW Lawncare &amp; Services</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">Services &amp; Pricing</h1>
+      <p class="text-xl text-green-100/90 max-w-2xl mx-auto mb-10">
+        Three services. Transparent pricing. No surprises — just professional results every time.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/#booking" class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-4 rounded-xl text-base transition">
+          📅 Book Lawn Mowing — $40
+        </a>
+        <a href="/#chat" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-8 py-4 rounded-xl text-base transition backdrop-blur-sm">
+          Request a Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <Features2
-    title="What we offer"
-    subtitle="Replace these with your actual services. Each card can include a title, description, and icon."
-    columns={3}
+  <!-- ══ PRICE SUMMARY STRIP ══ -->
+  <div class="bg-green-700 dark:bg-green-900">
+    <div class="max-w-5xl mx-auto px-4 py-5 grid grid-cols-3 divide-x divide-green-600 dark:divide-green-800 text-center">
+      {([
+        { service: 'Lawn Mowing', price: '$40 flat', note: 'per lawn, any size' },
+        { service: 'Mulching', price: 'Free Quote', note: 'based on area & material' },
+        { service: 'Window Washing', price: 'Free Quote', note: 'based on window count' },
+      ] as { service: string; price: string; note: string }[]).map(({ service, price, note }) => (
+        <div class="px-4 py-1">
+          <p class="text-xs text-green-300 uppercase tracking-widest mb-0.5">{service}</p>
+          <p class="text-xl font-extrabold text-white">{price}</p>
+          <p class="text-xs text-green-300/80">{note}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+
+  <!-- ══ SERVICE 1: LAWN MOWING ══ -->
+  <Content
+    id="mowing"
+    isReversed
+    tagline="Flat Rate — $40 / Lawn"
+    title="Lawn Mowing"
     items={[
       {
-        title: 'Service One',
-        description:
-          'Describe your first service here. What does it include? Who is it for? What problem does it solve for your customers?',
-        icon: 'tabler:tool',
+        title: 'Clean, precise cuts',
+        description: 'We mow at your preferred height using sharp, well-maintained equipment so you get a clean, even cut — not a ragged one.',
+        icon: 'tabler:cut',
       },
       {
-        title: 'Service Two',
-        description:
-          'Describe your second service here. Highlight the key benefits and what makes your approach different from competitors.',
-        icon: 'tabler:settings',
+        title: 'Edging & trimming included',
+        description: 'Every mow includes crisp edging along walkways, driveways, and flower beds. No extra charge, no cutting corners.',
+        icon: 'tabler:line',
       },
       {
-        title: 'Service Three',
-        description:
-          'Describe your third service here. Focus on outcomes — what will the customer experience after the work is complete?',
-        icon: 'tabler:star',
+        title: 'Clippings cleared',
+        description: 'We blow clippings off hard surfaces so your driveway and sidewalks are clean when we leave.',
+        icon: 'tabler:wind',
       },
       {
-        title: 'Service Four',
-        description:
-          'Add as many services as you need. You can also add or remove cards to match your actual service offerings.',
-        icon: 'tabler:home',
-      },
-      {
-        title: 'Service Five',
-        description:
-          'Use specific, customer-friendly language. Avoid jargon and explain each service as if speaking to someone unfamiliar with your industry.',
-        icon: 'tabler:truck',
-      },
-      {
-        title: 'Emergency / Rush Service',
-        description:
-          'When you need us fast, we\'re there. We offer expedited scheduling for urgent situations — just let us know when you call.',
-        icon: 'tabler:clock-bolt',
+        title: 'Flexible scheduling',
+        description: 'Weekly, bi-weekly, or one-time cuts — whatever fits your schedule. Pick your days on the booking calendar.',
+        icon: 'tabler:calendar-check',
       },
     ]}
-  />
+    image={{
+      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Professional lawn mowing',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Always $40. Always done right.</h3>
+      No measuring, no bidding, no surprises. Every standard residential lawn is $40 — period.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
 
-  <!-- Content Widget **************** -->
+  <!-- ══ MOWING BOOK CTA ══ -->
+  <div class="bg-white dark:bg-slate-950 py-8">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <a href="/#booking" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-10 py-4 rounded-xl text-base transition shadow-lg shadow-green-200 dark:shadow-green-900/20">
+        📅 Book Lawn Mowing — $40
+      </a>
+    </div>
+  </div>
 
+
+  <!-- ══ SERVICE 2: MULCHING ══ -->
   <Content
-    isReversed
+    id="mulching"
+    tagline="Free Quote — No Obligation"
+    title="Mulching"
     items={[
       {
-        title: 'Thorough Assessment',
-        description:
-          'Every job starts with a careful evaluation of your specific needs. We never cut corners or make assumptions.',
-        icon: 'tabler:clipboard-list',
+        title: 'All mulch types available',
+        description: 'Hardwood, cedar, pine straw, or dyed varieties — we source quality mulch and apply it evenly for a clean, finished look.',
+        icon: 'tabler:leaf',
       },
       {
-        title: 'Quality Materials',
-        description:
-          'We use only trusted, high-quality materials and tools so the results last and you get real value for your investment.',
-        icon: 'tabler:certificate',
+        title: 'Bed preparation included',
+        description: 'We edge and clean your beds before applying mulch so the results look sharp and professional, not just dumped on top.',
+        icon: 'tabler:shovel',
       },
       {
-        title: 'Clean Worksite',
-        description:
-          'We treat your property with respect. Every job ends with a thorough cleanup — we leave things better than we found them.',
+        title: 'Weed suppression',
+        description: 'Properly applied mulch at the right depth slows weed growth and retains moisture, reducing maintenance all season.',
+        icon: 'tabler:plant-off',
+      },
+      {
+        title: 'Full cleanup',
+        description: "We haul away any debris and leave your property spotless. You'll barely know we were there — except everything looks great.",
         icon: 'tabler:sparkles',
       },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80',
+      alt: 'Fresh mulch applied to garden beds',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Fresh beds, every season.</h3>
+      Pricing is based on square footage and material. We measure, quote, and only start work once you approve.
+    </Fragment>
+  </Content>
+
+  <!-- ══ MULCHING QUOTE CTA ══ -->
+  <div class="bg-white dark:bg-slate-950 py-8">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <a href="/#chat" class="inline-flex items-center justify-center gap-2 border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-500 hover:bg-green-600 hover:text-white font-bold px-10 py-4 rounded-xl text-base transition">
+        Request a Mulching Quote →
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ══ SERVICE 3: WINDOW WASHING ══ -->
+  <Content
+    id="windows"
+    isReversed
+    tagline="Free Quote — No Obligation"
+    title="Exterior Window Washing"
+    items={[
       {
-        title: 'Final Walkthrough',
-        description:
-          'Before we call any job complete, we walk you through the finished work and make sure you\'re 100% satisfied.',
-        icon: 'tabler:check',
+        title: 'All exterior windows & frames',
+        description: "We clean the glass, frames, and sills — not just a quick wipe. Every window gets individual attention for a streak-free result.",
+        icon: 'tabler:windmill',
+      },
+      {
+        title: 'Screen cleaning available',
+        description: 'Ask us to include screen removal and cleaning — we rinse, dry, and reinstall each screen carefully.',
+        icon: 'tabler:grid-4x4',
+      },
+      {
+        title: 'Streak-free guarantee',
+        description: "If we miss a streak, we come back and fix it. No arguments, no charge. That's our promise.",
+        icon: 'tabler:eye-check',
+      },
+      {
+        title: 'Residential & light commercial',
+        description: 'We handle homes, small offices, storefronts, and rental properties. If it has windows we can reach safely, we clean it.',
+        icon: 'tabler:building',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1648&q=80',
+      alt: 'Crystal clear exterior windows',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Crystal clear. Streak-free. Guaranteed.</h3>
+      We count your windows, give you a flat quote, and get to work — usually in under 2 hours for a standard home.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- ══ WINDOW QUOTE CTA ══ -->
+  <div class="bg-white dark:bg-slate-950 py-8">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <a href="/#chat" class="inline-flex items-center justify-center gap-2 border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-500 hover:bg-green-600 hover:text-white font-bold px-10 py-4 rounded-xl text-base transition">
+        Request a Window Washing Quote →
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <Steps
+    title="How it works"
+    subtitle="From first contact to a finished job — simple, fast, and hassle-free."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Reach out</span>',
+        description: 'Book online using our calendar, send us a message, or give us a call. Takes less than two minutes.',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">We confirm & show up</span>',
+        description: 'You\'ll hear from us within 24 hours to confirm your slot. We arrive on time, every time — no waiting around.',
+        icon: 'tabler:clock-check',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Quality work done right</span>',
+        description: 'Our team completes the job efficiently and to a high standard. We walk the property before we leave to make sure everything is right.',
+        icon: 'tabler:tools',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">Easy payment via Venmo</span>',
+        description: 'After the job, pay quickly and securely via Venmo. No cash fumbling, no checks — just send and done.',
+        icon: 'tabler:credit-card',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1726&q=80',
-      alt: 'Quality workmanship',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Our process</h3>
-      We follow a proven, step-by-step process on every job to ensure consistent, high-quality results.
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Save Time',
-        description:
-          'Stop spending your weekends on tasks better left to the professionals. We handle it so you can focus on what matters most.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Save Money',
-        description:
-          'DIY mistakes can be costly. Our upfront pricing and expert execution often saves customers money in the long run.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Peace of Mind',
-        description:
-          'Know the job is done right, by licensed professionals who stand behind their work with a satisfaction guarantee.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Local Support',
-        description:
-          'We\'re a local business — easy to reach, quick to respond, and invested in the health of our community.',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Benefits of hiring us',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Why hire a professional?</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Hear from our customers"
-    testimonials={[
-      {
-        testimonial: `They handled our [service] project from start to finish and the results were outstanding. On time, on budget, and the quality of work was top-notch.`,
-        name: 'Robert K.',
-        job: '[Your City] Homeowner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
-          alt: 'Robert K.',
-        },
-      },
-      {
-        testimonial: `I called three companies before choosing [Your Business Name]. Their quote was fair, their communication was excellent, and they delivered exactly what they promised.`,
-        name: 'Linda P.',
-        job: 'Local Restaurant Owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-          alt: 'Linda P.',
-        },
-      },
-      {
-        testimonial: `Professional, knowledgeable, and genuinely nice people. They explained every step and made sure I understood what they were doing and why. Will absolutely use them again.`,
-        name: 'Carlos M.',
-        job: '[Your City] Resident',
-        image: {
-          src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
-          alt: 'Carlos M.',
-        },
-      },
-    ]}
-    callToAction={{
-      text: 'Read more reviews',
-      href: '#',
-      icon: 'tabler:chevron-right',
+      alt: 'Professional lawn care team at work',
     }}
   />
 
-  <!-- CallToAction Widget *********** -->
 
+  <!-- ══ QUALITY FEATURES ══ -->
+  <Features
+    tagline="Our Standards"
+    title="What every job includes"
+    subtitle="Whether it's a $40 mow or a large mulching project — these are non-negotiable on every visit."
+    items={[
+      {
+        title: 'Sharp, maintained equipment',
+        description: 'Dull blades tear grass instead of cutting it. We sharpen and maintain our equipment regularly for clean, healthy cuts.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Insured & professional',
+        description: 'We carry full liability insurance. If anything goes wrong on your property, you\'re covered. No excuses.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'On-time arrival',
+        description: 'We give you a window and we hit it. If something changes, we call ahead — never just ghost.',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'Clean worksite',
+        description: "We blow debris off hard surfaces, bag clippings, and leave your property tidy before we pack up.",
+        icon: 'tabler:sparkles',
+      },
+      {
+        title: 'Satisfaction guarantee',
+        description: "Not happy with a result? Call us same day and we come back to fix it at no charge. No debates.",
+        icon: 'tabler:star',
+      },
+      {
+        title: 'Consistent crew',
+        description: "You\'ll see the same faces each visit — no strangers, no rotation roulette. Familiar faces build trust.",
+        icon: 'tabler:users',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features>
+
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <Testimonials
+    title="What our customers say"
+    testimonials={[
+      {
+        testimonial: 'My lawn looks incredible every week. Always on time, always thorough. The edging alone makes it look 10x better than when I was doing it myself. Best $40 I spend.',
+        name: 'Kevin M.',
+        job: 'Homeowner — weekly mow customer',
+        image: {
+          src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
+          alt: 'Kevin M.',
+        },
+      },
+      {
+        testimonial: 'Had them do the mulch beds front and back. Quote came same day, they showed up two days later, and knocked it out in a few hours. Clean, professional, and reasonably priced.',
+        name: 'Diane H.',
+        job: 'Mulching customer',
+        image: {
+          src: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Diane H.',
+        },
+      },
+      {
+        testimonial: 'Window washing on my two-story felt risky doing myself. WW Lawncare had everything done in under 2 hours — absolutely streak-free. Way worth it.',
+        name: 'Tom B.',
+        job: 'Window washing customer',
+        image: {
+          src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
+          alt: 'Tom B.',
+        },
+      },
+    ]}
+  />
+
+
+  <!-- ══ SERVICE FAQs ══ -->
+  <FAQs
+    title="Service questions"
+    tagline="FAQ"
+    subtitle="The most common things customers ask us before booking."
+    classes={{ container: 'max-w-5xl' }}
+    items={[
+      {
+        title: 'Do I need to be home when you mow?',
+        description:
+          "Nope! As long as we can access your yard — gate unlocked, dog inside — we can complete the job while you're away. We'll send a quick text when we're done.",
+      },
+      {
+        title: 'What counts as a "standard lawn" for the $40 price?',
+        description:
+          "For the vast majority of residential properties, $40 covers it. If your lawn is exceptionally large or has significant obstacles, we'll let you know before we start — never a surprise upcharge after.",
+      },
+      {
+        title: 'How far in advance do I need to book?',
+        description:
+          'We can often accommodate bookings within 1–2 business days. For recurring service, we recommend booking the first visit at least a week out to secure your preferred time slot.',
+      },
+      {
+        title: 'How do I get a quote for mulching or windows?',
+        description:
+          "Just send us a message through our chat or give us a call. For mulching, we'll ask for rough square footage or stop by to measure. For windows, just let us know the number of windows and stories.",
+      },
+      {
+        title: 'Do you offer recurring service discounts?',
+        description:
+          'Lawn mowing is already our best value at $40 flat. For regular mulching or window washing schedules, ask us about seasonal packages — we take care of our repeat customers.',
+      },
+      {
+        title: 'What if it rains on my scheduled day?',
+        description:
+          "Light rain usually isn't a problem for mowing. Heavy rain or storms? We'll reschedule to the next available slot and reach out to confirm the new time.",
+      },
+      {
+        title: 'Is there a contract or minimum commitment?',
+        description:
+          'No contracts, ever. Book as often as you need — weekly, bi-weekly, monthly, or one-time. Cancel any visit with 24 hours notice, no fees.',
+      },
+      {
+        title: 'How do I pay?',
+        description:
+          "We accept payment via Venmo after each completed job. Just send to @WWLawncare with your name and service date in the note. Easy.",
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+
+  <!-- ══ FINAL CTA ══ -->
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get a Free Quote',
-        href: '/contact',
+        text: 'Book Lawn Mowing — $40',
+        href: '/#booking',
+        icon: 'tabler:calendar',
+      },
+      {
+        variant: 'secondary',
+        text: 'Request a Free Quote',
+        href: '/#chat',
+        icon: 'tabler:message',
       },
     ]}
-    title="Ready to get started?"
-    subtitle="Contact us today for a free consultation and no-obligation estimate. We'd love to help."
-  />
+  >
+    <Fragment slot="title">Ready to book?</Fragment>
+    <Fragment slot="subtitle">
+      Lawn mowing is always $40. Mulching and window washing start with a free, no-obligation quote.
+    </Fragment>
+  </CallToAction>
+
 </Layout>

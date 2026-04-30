@@ -1,0 +1,304 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Gallery — Our Work',
+};
+
+const galleryItems = [
+  {
+    label: 'Lawn Mowing',
+    before: {
+      src: 'https://images.unsplash.com/photo-1591467372874-4bca4a08e694?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Overgrown lawn before mowing',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Clean, freshly mowed lawn',
+    },
+  },
+  {
+    label: 'Lawn Mowing',
+    before: {
+      src: 'https://images.unsplash.com/photo-1551649001-7a2d6b9e7b5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Tall grass before service',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Beautiful green lawn after mowing',
+    },
+  },
+  {
+    label: 'Mulching',
+    before: {
+      src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Bare garden bed before mulching',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Freshly mulched garden bed',
+    },
+  },
+  {
+    label: 'Mulching',
+    before: {
+      src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Overgrown garden bed',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Clean mulched beds after service',
+    },
+  },
+  {
+    label: 'Window Washing',
+    before: {
+      src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7e70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Dirty exterior windows before cleaning',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Crystal clear windows after washing',
+    },
+  },
+  {
+    label: 'Window Washing',
+    before: {
+      src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7e70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Grimy windows before service',
+    },
+    after: {
+      src: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+      alt: 'Sparkling clean windows',
+    },
+  },
+];
+---
+
+<Layout metadata={metadata}>
+
+  <!-- ══ PAGE HERO ══ -->
+  <section class="relative overflow-hidden -mt-[76px]">
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-950/80 to-green-950/80" aria-hidden="true"></div>
+    <div class="relative max-w-3xl mx-auto px-4 text-center py-36 pt-44">
+      <p class="text-xs font-semibold uppercase tracking-widest text-green-300 mb-3">WW Lawncare &amp; Services</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-5">Our Work</h1>
+      <p class="text-xl text-green-100/90 max-w-xl mx-auto">
+        Real results from real jobs. Before &amp; after photos from customers in our service area.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══ ADD YOUR PHOTOS BANNER ══ -->
+  <div class="bg-green-700 dark:bg-green-900 py-3 px-4 text-center">
+    <p class="text-green-100 text-sm">
+      📸 <strong class="text-white">Replace these with your own photos</strong> — edit <code class="bg-green-800 px-1 rounded text-xs">src/pages/gallery.astro</code> to add real before/after shots from your jobs.
+    </p>
+  </div>
+
+
+  <!-- ══ BEFORE / AFTER GRID ══ -->
+  <section class="py-16 bg-white dark:bg-slate-950">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">Results</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">Before &amp; After</h2>
+        <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+          Every job is a chance to make a property look its best. See the WW Lawncare difference.
+        </p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-2 justify-center mb-10">
+        {(['All', 'Lawn Mowing', 'Mulching', 'Window Washing'] as string[]).map((filter) => (
+          <button
+            data-filter={filter}
+            class={`gallery-filter px-4 py-2 rounded-full text-sm font-semibold border-2 transition ${filter === 'All' ? 'bg-green-600 border-green-600 text-white' : 'border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:border-green-400 hover:text-green-700 dark:hover:text-green-400'}`}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+        {galleryItems.map(({ label, before, after }) => (
+          <div class="gallery-item rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-800 shadow-md bg-white dark:bg-slate-900" data-label={label}>
+            <!-- Label badge -->
+            <div class="px-4 pt-4 pb-2 flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-widest text-green-600 dark:text-green-400">{label}</span>
+              <div class="flex gap-1">
+                <span class="text-xs bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold px-2 py-0.5 rounded-full">Before</span>
+                <span class="text-green-500 text-xs font-bold">→</span>
+                <span class="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold px-2 py-0.5 rounded-full">After</span>
+              </div>
+            </div>
+
+            <!-- Split image row -->
+            <div class="grid grid-cols-2 gap-1 px-4 pb-4">
+              <div class="relative overflow-hidden rounded-xl">
+                <img
+                  src={before.src}
+                  alt={before.alt}
+                  class="w-full h-40 object-cover"
+                  loading="lazy"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent py-2 px-2">
+                  <span class="text-white text-xs font-bold">Before</span>
+                </div>
+              </div>
+              <div class="relative overflow-hidden rounded-xl">
+                <img
+                  src={after.src}
+                  alt={after.alt}
+                  class="w-full h-40 object-cover"
+                  loading="lazy"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-green-900/60 to-transparent py-2 px-2">
+                  <span class="text-white text-xs font-bold">After ✓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══ SINGLE "OUR WORK" PHOTO GRID ══ -->
+  <section class="py-16 bg-green-50 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <p class="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">Finished Work</p>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Lawns we're proud of</h2>
+        <p class="text-gray-500 dark:text-gray-400">
+          Add your own photos here to show potential customers what to expect.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {([
+          {
+            src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Perfectly mowed residential lawn',
+            label: 'Weekly mow — [City]',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Lush green lawn',
+            label: 'Bi-weekly mow — [City]',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Freshly mulched garden beds',
+            label: 'Spring mulch — [City]',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Clean windows after washing',
+            label: 'Window wash — [City]',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Clean edged lawn',
+            label: 'One-time mow — [City]',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75',
+            alt: 'Fresh mulch in flower beds',
+            label: 'Fall mulch refresh — [City]',
+          },
+        ] as { src: string; alt: string; label: string }[]).map(({ src, alt, label }) => (
+          <div class="group relative overflow-hidden rounded-2xl shadow-md aspect-[4/3]">
+            <img
+              src={src}
+              alt={alt}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <p class="text-white text-sm font-semibold">{label}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ SOCIAL PROOF CTA ══ -->
+  <section class="py-12 bg-white dark:bg-slate-950">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">
+        📱 Follow us on Instagram &amp; Facebook for more before/after photos, lawn care tips, and seasonal offers.
+      </p>
+      <div class="flex gap-3 justify-center flex-wrap">
+        <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-6 py-3 rounded-xl text-sm transition hover:opacity-90">
+          📸 Instagram
+        </a>
+        <a href="#" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition">
+          👍 Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ FINAL CTA ══ -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Lawn Mowing — $40',
+        href: '/#booking',
+        icon: 'tabler:calendar',
+      },
+      {
+        variant: 'secondary',
+        text: 'Request a Free Quote',
+        href: '/#chat',
+        icon: 'tabler:message',
+      },
+    ]}
+  >
+    <Fragment slot="title">Want results like these?</Fragment>
+    <Fragment slot="subtitle">
+      Book a mow for $40 or reach out for a free quote on mulching or window washing.
+    </Fragment>
+  </CallToAction>
+
+</Layout>
+
+<script>
+  // Gallery filter tabs
+  const filters = document.querySelectorAll<HTMLButtonElement>('.gallery-filter');
+  const items = document.querySelectorAll<HTMLElement>('.gallery-item');
+
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'All';
+
+      filters.forEach((b) => {
+        b.className = 'gallery-filter px-4 py-2 rounded-full text-sm font-semibold border-2 transition border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:border-green-400 hover:text-green-700 dark:hover:text-green-400';
+      });
+      btn.className = 'gallery-filter px-4 py-2 rounded-full text-sm font-semibold border-2 transition bg-green-600 border-green-600 text-white';
+
+      items.forEach((item) => {
+        const match = filter === 'All' || item.dataset.label === filter;
+        item.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>

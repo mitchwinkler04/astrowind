@@ -3,89 +3,141 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import BookingCalendar from '~/components/widgets/BookingCalendar.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact Us',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact Us" title="Let's talk!" />
+  <!-- ══ HERO TEXT ══ -->
+  <HeroText
+    tagline="Contact WW Lawncare"
+    title="Let's get to work."
+    subtitle="Questions, quotes, feedback — we love hearing from customers. Pick the fastest way to reach us below."
+  />
 
+
+  <!-- ══ CONTACT METHODS STRIP ══ -->
+  <div class="max-w-5xl mx-auto px-4 pb-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {([
+        { icon: '📞', label: 'Call Us', detail: '(555) 000-0000', href: 'tel:5550000000', color: 'green' },
+        { icon: '💬', label: 'Text Us', detail: '(555) 000-0000', href: 'sms:5550000000', color: 'blue' },
+        { icon: '✉️', label: 'Email Us', detail: 'hello@wwlawncare.com', href: 'mailto:hello@wwlawncare.com', color: 'purple' },
+        { icon: '💸', label: 'Pay via Venmo', detail: '@WWLawncare', href: 'https://venmo.com/WWLawncare', color: 'cyan' },
+      ] as { icon: string; label: string; detail: string; href: string; color: string }[]).map(({ icon, label, detail, href }) => (
+        <a
+          href={href}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          class="flex flex-col items-center gap-2 bg-white dark:bg-slate-900 rounded-xl p-5 border border-gray-100 dark:border-slate-800 shadow-sm hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition group text-center"
+        >
+          <span class="text-3xl">{icon}</span>
+          <span class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-400">{label}</span>
+          <span class="text-xs text-gray-400 break-all">{detail}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+
+  <!-- ══ CONTACT FORM ══ -->
   <ContactUs
     id="form"
     title="Send us a message"
-    subtitle="Fill out the form below and we'll get back to you within one business day. Prefer to talk? Give us a call — we love hearing from our customers."
+    subtitle="Fill this out and we'll reply within one business day. For faster response, call or text us directly."
     inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Your Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email Address',
-      },
-      {
-        type: 'text',
-        name: 'phone',
-        label: 'Phone Number (optional)',
-      },
+      { type: 'text', name: 'name', label: 'Your Name' },
+      { type: 'email', name: 'email', label: 'Email Address' },
+      { type: 'text', name: 'phone', label: 'Phone Number' },
     ]}
     textarea={{
-      label: 'Tell us about your project',
-      placeholder: 'Describe what you need help with. The more detail, the better!',
+      label: 'Your Message',
+      placeholder: 'Tell us what you need — mowing, mulching, window washing, or something else. The more detail the better!',
     }}
     disclaimer={{
-      label:
-        'By submitting this form, you agree that we may contact you regarding your inquiry.',
+      label: 'By submitting this form, you agree we may contact you regarding your inquiry.',
     }}
-    description="We typically respond within one business day. For urgent matters, please call us directly."
+    description="We typically respond within one business day. For urgent requests, please call or text us."
   />
 
-  <!-- Features2 Widget ************** -->
 
+  <!-- ══ INFO CARDS ══ -->
   <Features2
-    title="Other ways to reach us"
+    title="Everything you need to know"
+    columns={3}
     items={[
       {
         title: 'Phone & Text',
-        description: `Call or text us at <strong>(555) 123-4567</strong>. Available Monday–Friday, 8am–6pm. We also check messages on weekends.`,
+        description:
+          '<strong>(555) 000-0000</strong><br />Mon–Fri: 8am–6pm<br />Sat: 9am–3pm<br />Text anytime!',
         icon: 'tabler:phone',
       },
       {
         title: 'Email',
         description:
-          'Email us at <strong>hello@yourbusiness.com</strong>. We aim to respond to all emails within one business day.',
+          '<strong>hello@wwlawncare.com</strong><br />We reply within one business day. For quotes, include your address and a description of the job.',
         icon: 'tabler:mail',
       },
       {
         title: 'Service Area',
         description:
-          'We serve <strong>[Your City]</strong> and surrounding communities within [X] miles. Not sure if we cover your area? Just ask!',
+          'We serve <strong>[Your City]</strong> and surrounding communities within [X] miles. Not sure? Ask — we\'ll check.',
         icon: 'tabler:map-pin',
       },
       {
         title: 'Hours of Operation',
         description:
-          '<strong>Monday–Friday:</strong> 8am–6pm<br /><strong>Saturday:</strong> 9am–3pm<br /><strong>Sunday:</strong> By appointment',
+          '<strong>Monday–Friday:</strong> 8am–6pm<br /><strong>Saturday:</strong> 9am–3pm<br /><strong>Sunday:</strong> By appointment only',
         icon: 'tabler:clock',
       },
       {
-        title: 'Emergency Service',
+        title: 'Response Time',
         description:
-          'For urgent situations, call our emergency line at <strong>(555) 987-6543</strong>. We do our best to respond quickly.',
-        icon: 'tabler:alert-triangle',
+          'Calls and texts are answered same day during business hours. Emails and messages come back within one business day.',
+        icon: 'tabler:message-bolt',
       },
       {
-        title: 'Follow Us',
+        title: 'Payment',
         description:
-          'Stay up to date with tips, before/after photos, and special offers by following us on Facebook and Instagram.',
-        icon: 'tabler:brand-facebook',
+          'We accept payment via Venmo after each completed job. Send to <strong>@WWLawncare</strong> with your name and service date.',
+        icon: 'tabler:credit-card',
       },
     ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+
+  <!-- ══ INLINE BOOKING CALENDAR ══ -->
+  <BookingCalendar
+    title="Or book directly"
+    subtitle="Pick a date and time right here — no phone call needed."
+    tagline="Book Online"
   />
+
+
+  <!-- ══ FINAL CTA ══ -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'View Services & Pricing',
+        href: '/services',
+        icon: 'tabler:list',
+      },
+    ]}
+  >
+    <Fragment slot="title">Not sure what you need?</Fragment>
+    <Fragment slot="subtitle">
+      Browse our services page for full details on lawn mowing, mulching, and window washing — with pricing.
+    </Fragment>
+  </CallToAction>
+
 </Layout>

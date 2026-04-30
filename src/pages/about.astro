@@ -1,11 +1,12 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
+import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
+import Features from '~/components/widgets/Features.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
   title: 'About Us',
@@ -13,177 +14,248 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
 
+  <!-- ══ HERO ══ -->
   <Hero
-    tagline="About Us"
+    tagline="About WW Lawncare & Services"
     image={{
       src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Our team',
+      alt: 'WW Lawncare team at work',
     }}
   >
     <Fragment slot="title">
-      A local business <br />
-      <span class="text-accent dark:text-white">built on trust</span>
+      Local, professional,<br />
+      <span class="text-accent dark:text-white">built on precision.</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      We started [Your Business Name] in [Year] with a simple idea: deliver honest, high-quality [service] at fair prices — and treat every customer the way we'd want to be treated. That philosophy hasn't changed. Replace this with your own story and it will make a real connection with potential customers.
+      WW Lawncare &amp; Services was founded on one simple belief: your lawn and home deserve the same care and attention
+      we'd give our own. We're a local lawn care and property services company — not a franchise, not a call center.
+      Just real people who take real pride in the work we do in our community.
     </Fragment>
   </Hero>
 
-  <!-- Stats Widget ****************** -->
 
+  <!-- ══ STATS ══ -->
   <Stats
-    title="By the numbers"
+    title="We show up and deliver"
     stats={[
-      { title: 'Years in Business', amount: '[X]+' },
-      { title: 'Customers Served', amount: '[X]K+' },
-      { title: 'Projects Completed', amount: '[X]K+' },
-      { title: '5-Star Reviews', amount: '[X]+' },
+      { title: 'Lawns Maintained', amount: '500+' },
+      { title: 'Happy Customers', amount: '200+' },
+      { title: 'Jobs Completed', amount: '1,200+' },
+      { title: '5-Star Reviews', amount: '150+' },
     ]}
   />
 
-  <!-- Features3 Widget ************** -->
 
-  <Features3
-    title="Meet our team"
-    subtitle="Replace these cards with photos and bios of your actual team members. Putting real faces to your business builds trust and makes you more approachable."
-    columns={3}
-    isBeforeContent={true}
+  <!-- ══ OUR STORY ══ -->
+  <Content
+    isReversed
+    tagline="Our Story"
+    title="Why we started"
     items={[
       {
-        title: '[Owner Name], Owner',
+        title: 'Frustrated by unreliable services',
         description:
-          '[Owner Name] founded [Your Business Name] in [Year] after [X] years working in the [industry]. [He/She/They] is passionate about delivering exceptional results and building long-term relationships with customers.',
-        icon: 'tabler:user',
+          'Like a lot of homeowners, our founder grew tired of lawn care companies that no-showed, did sloppy work, and overcharged without warning. WW Lawncare was the answer.',
       },
       {
-        title: '[Team Member], Lead [Role]',
+        title: 'Built from the ground up, locally',
         description:
-          '[Team Member] has been with us since [Year] and brings [X] years of experience in [specialty]. Known for [a standout quality], [he/she/they] is a customer favorite.',
-        icon: 'tabler:user',
+          "We started with a single mower, one truck, and a commitment to doing things right. Every dollar of growth came from referrals — customers telling neighbors about us.",
       },
       {
-        title: '[Team Member], [Role]',
+        title: 'Still local, still personal',
         description:
-          'Add as many team members as you\'d like. Customers love knowing who will be showing up to do the work — it adds a personal touch that larger companies can\'t match.',
-        icon: 'tabler:user',
+          "We haven't grown into a faceless franchise and we never plan to. Our customers know our names. We know their yards. That relationship matters.",
       },
     ]}
-  />
+    image={{
+      src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2084&q=80',
+      alt: 'Team working together',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">"Precision Meets Nature"</h3>
+      Our slogan isn't just marketing. Precision means showing up on time, cutting clean, and charging what we quoted.
+      Nature means respecting your property and the environment we work in every day.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
 
-  <!-- Steps2 Widget ****************** -->
 
+  <!-- ══ VALUES ══ -->
   <Steps2
-    title="Our values"
-    subtitle="These aren't just words on a wall — they guide every decision we make and every job we take on."
+    title="What we stand for"
+    subtitle="These aren't slogans on a poster — they're the standards we hold ourselves to on every single job."
     items={[
       {
-        title: 'Integrity',
+        title: 'Honesty',
         description:
-          'We tell you the truth, even when it\'s not what you want to hear. Honest assessments and transparent pricing are non-negotiable.',
+          "We quote a fair price and stick to it. If something comes up mid-job, we call you before we do extra work — not after. You'll never get an unexpected invoice.",
       },
       {
-        title: 'Quality Craftsmanship',
+        title: 'Precision',
         description:
-          'We take pride in our work. Every job gets our full attention and effort, whether it\'s a small repair or a major project.',
+          "Sloppy work isn't in our vocabulary. Every edge is straight, every window streak-free, every bed level. Details matter to us because they matter to you.",
+      },
+      {
+        title: 'Reliability',
+        description:
+          'We show up. Every time. On time. If something prevents it, we call — we never just ghost. Reliability is the hardest thing to find in this industry and we protect it fiercely.',
       },
       {
         title: 'Community',
         description:
-          'We\'re your neighbors. We care about [Your City] and give back through [local sponsorships, volunteering, etc.]. When local businesses thrive, everyone benefits.',
+          "This is our town too. We sponsor local events, hire locally, and take pride in making our neighborhood look its best — one lawn at a time.",
       },
     ]}
   />
 
-  <!-- Steps2 Widget ****************** -->
 
-  <Steps2
-    title="Our story"
-    subtitle="How we got here — and where we're going."
-    isReversed={true}
-    callToAction={{
-      text: 'Contact us',
-      href: '/contact',
-    }}
+  <!-- ══ MEET THE TEAM ══ -->
+  <Features
+    tagline="The Team"
+    title="People who take pride in the work"
+    subtitle="Small team, high standards. You'll see the same friendly faces on every visit."
     items={[
       {
-        title: 'Founded in [Year]',
-        description: 'Describe how the business started. Was it a lifelong passion? A gap in the local market? A family tradition? This is your story — make it authentic.',
-        icon: 'tabler:home',
+        title: '[Owner Name], Founder & Owner',
+        description:
+          "Started WW Lawncare after years in the landscape industry. Personally oversees every job and is never more than a phone call away.",
+        icon: 'tabler:user-circle',
       },
       {
-        title: 'Growing our team',
+        title: '[Name], Lead Crew Member',
         description:
-          'As word spread and demand grew, we brought on more skilled professionals who share our commitment to quality. Today our team includes [X] full-time staff.',
-        icon: 'tabler:users',
+          'Handles lawn mowing and mulching with meticulous attention to detail. Customers request them by name.',
+        icon: 'tabler:user-circle',
       },
       {
-        title: 'Trusted by [Your City]',
+        title: '[Name], Window Washing Specialist',
         description:
-          'Today, we\'re proud to be one of [Your City]\'s most trusted [service] providers. Our reputation is built on referrals — customers who love our work and tell their friends.',
-        icon: 'tabler:star',
+          'Streak-free results, every time. Experienced working on single and multi-story properties safely and efficiently.',
+        icon: 'tabler:user-circle',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features>
 
-  <!-- Features2 Widget ************** -->
 
+  <!-- ══ WHY US ══ -->
+  <Content
+    tagline="Why WW Lawncare"
+    title="The difference you'll notice"
+    items={[
+      {
+        title: 'No contracts or commitments',
+        description:
+          'Book when you need us, skip when you don\'t. There are no lock-ins, cancellation fees, or minimum commitments. Ever.',
+        icon: 'tabler:file-off',
+      },
+      {
+        title: 'Flat-rate mowing, always $40',
+        description:
+          'While other companies measure and bid on every lawn, we keep it simple. A standard residential lawn is $40 — no games.',
+        icon: 'tabler:receipt',
+      },
+      {
+        title: 'Fast response, fast quotes',
+        description:
+          "Message us and we respond same day. Mulching and window washing quotes typically come back within a few hours.",
+        icon: 'tabler:message-bolt',
+      },
+      {
+        title: 'Easy Venmo payments',
+        description:
+          'Pay after the job is done via Venmo — quick, simple, no cash or check required.',
+        icon: 'tabler:brand-cashapp',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Freshly mowed lawn',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Simple. Reliable. Worth it.</h3>
+    </Fragment>
+  </Content>
+
+
+  <!-- ══ SERVICE AREA ══ -->
   <Features2
-    title="Service area"
-    tagline="Find us"
+    title="Where we work"
+    tagline="Service Area"
+    subtitle="We serve the local area and surrounding communities. Not sure if we cover your address? Just ask — we're happy to check."
     columns={3}
     items={[
       {
         title: '[Your City]',
-        description: 'Our home base. We serve all neighborhoods in [Your City].',
+        description: 'Our home base. We serve all neighborhoods, subdivisions, and streets.',
       },
       {
-        title: '[Nearby Town]',
-        description: 'We regularly serve customers in [Nearby Town] and surrounding areas.',
+        title: '[Nearby Town 1]',
+        description: 'Full service available — mowing, mulching, and window washing.',
       },
       {
-        title: '[Another Town]',
-        description: 'Add all the cities and towns you serve. Remove any that don\'t apply.',
+        title: '[Nearby Town 2]',
+        description: 'Add or remove towns to match your real service area.',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
 
-  <!-- Features2 Widget ************** -->
 
+  <!-- ══ CONTACT QUICK STRIP ══ -->
   <Features2
-    title="Get in touch"
-    tagline="Contact us"
+    title="Reach us directly"
+    tagline="Get in Touch"
     columns={2}
     items={[
       {
         title: 'Call or Text',
-        description:
-          'Reach us at [(555) 123-4567]. We answer calls Monday–Friday, [8am–5pm], and often on weekends too.',
+        description: 'Reach us at <strong>(555) 000-0000</strong> — Mon–Fri 8am–6pm, Sat 9am–3pm.',
         icon: 'tabler:phone',
       },
       {
-        title: 'Email Us',
-        description:
-          'Send us a message at [hello@yourbusiness.com] and we\'ll respond within one business day.',
+        title: 'Email or Message',
+        description: 'Send us a note at <strong>hello@wwlawncare.com</strong> or use the chat on our homepage.',
         icon: 'tabler:mail',
       },
     ]}
   />
 
-  <!-- CallToAction Widget *********** -->
 
+  <!-- ══ FINAL CTA ══ -->
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get a Free Quote',
-        href: '/contact',
-        icon: 'tabler:arrow-right',
+        text: 'Book an Appointment',
+        href: '/#booking',
+        icon: 'tabler:calendar',
+      },
+      {
+        variant: 'secondary',
+        text: 'View Our Services',
+        href: '/services',
+        icon: 'tabler:list',
       },
     ]}
-    title="Let's work together"
-    subtitle="We'd love to earn your business. Reach out today for a free, no-pressure consultation."
-  />
+  >
+    <Fragment slot="title">Ready to work with us?</Fragment>
+    <Fragment slot="subtitle">
+      Book a lawn mowing for $40, or reach out for a free quote on mulching or window washing.
+    </Fragment>
+  </CallToAction>
+
 </Layout>
